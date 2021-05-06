@@ -1,4 +1,4 @@
-package lt.WebGallery;
+package lt.webgallery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
