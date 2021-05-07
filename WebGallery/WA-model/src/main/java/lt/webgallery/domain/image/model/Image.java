@@ -1,4 +1,4 @@
-package lt.webgallery.domain.model;
+package lt.webgallery.domain.image.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,15 +17,19 @@ public class Image {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private Byte[] image;
+
+    //image name field
+
+    //, nullable = false
 
     @Column(name = "upload_date")
     private LocalDate uploadDate;
 
-    //    @Enumerated(EnumType.STRING)
-    @Column(name = "image_quality", nullable = false)
-    private String imageQuality;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "image_quality")
+    private ImageQuality imageQuality;
 
     @Column(name = "image_description", length = 250)
     private String imageDescription;
