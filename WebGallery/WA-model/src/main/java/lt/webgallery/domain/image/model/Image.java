@@ -18,11 +18,12 @@ public class Image {
     private Long id;
 
     @Column(name = "image")
-    private Byte[] image;
+    private byte[] image;
 
-    //image name field
+    @Column(name = "image_name")
+    private String imageName;
 
-    //, nullable = false
+    //pridet prie butinu lauku po column name skliaustuose: , nullable = false
 
     @Column(name = "upload_date")
     private LocalDate uploadDate;

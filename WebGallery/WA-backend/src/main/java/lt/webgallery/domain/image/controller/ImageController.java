@@ -1,12 +1,11 @@
 package lt.webgallery.domain.image.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.webgallery.domain.image.model.Image;
+import lt.webgallery.domain.image.DTO.ImageDTO;
 import lt.webgallery.domain.image.service.ImageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,33 +18,33 @@ public class ImageController {
     private final ImageService imageService;
 
     @GetMapping
-    public List<Image> findAll() {
+    public List<ImageDTO> findAll() {
         return imageService.getAllImages();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Image> findById(@PathVariable Long id) {
+    public ImageDTO findById(@PathVariable Long id) {
         return imageService.getImageById(id);
     }
 
-    @GetMapping("/description/{imageDescription}")
-    public List<Image> findByDescription(@PathVariable String imageDescription) {
-        return imageService.getAllByDescription(imageDescription);
+    @GetMapping("/search/{query}")
+    public List<ImageDTO> findByDescription(@PathVariable("query") String query) {
+        return imageService.search(query);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Image createdImage) {
-        imageService.createImage(createdImage);
+    public void create(@RequestBody ImageDTO createdImage, MultipartFile multipartFile) {
+        imageService.createImage(createdImage, multipartFile);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable("id") Long id) {
         imageService.deleteImage(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Image> updateImage(@RequestBody Image image, @PathVariable Long id) {
-        return imageService.updateImage(id, image);
+    public void updateImage(@RequestParam(value = "data", required = false) @RequestBody ImageDTO image, @PathVariable Long id) {
+        imageService.updateImage(id, image);
     }
 }
