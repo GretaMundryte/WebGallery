@@ -52,31 +52,37 @@ public class ImageService {
             image.setUploadDate(LocalDate.now());
             image.setImageQuality(createdImage.getImageQuality());
             image.setImageDescription(createdImage.getImageDescription());
+            imageRepository.save(image);
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-        imageRepository.save(image);
     }
-
-//    public void uploadImage(MultipartFile imageFile) throws IOException {
-//        Image image = new Image();
-//        try {
-//            image.setImage(imageFile.getBytes());
-//            image.setUploadDate(LocalDate.now());
-//            image.setImageName(imageFile.getOriginalFilename());
-//            imageRepository.save(image);
-//        } catch (IOException exception) {
-//            exception.printStackTrace();
-//        }
-//    }
 
     public void deleteImage(Long id) {
         imageRepository.deleteById(id);
     }
 
-    public void updateImage(Long id, ImageDTO imageForUpdate) {
-        imageRepository.findById(id)
-                .map(ImageDTO::build)
-                .orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
+//    public void updateImage(Long id, ImageDTO imageForUpdate) {
+//        imageRepository.findById(id)
+//                .map(ImageDTO::build)
+//                .orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
+//    }
+
+    public void updateImage(Long id, ImageDTO imageForUpdate, MultipartFile multipartFile) {
+        Image image = imageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
+
+        if (multipartFile != null) {
+            try {
+                image.setId(imageForUpdate.getId());
+                image.setImage(multipartFile.getBytes());
+                image.setImageName(multipartFile.getOriginalFilename());
+                image.setUploadDate(LocalDate.now());
+                image.setImageQuality(imageForUpdate.getImageQuality());
+                image.setImageDescription(imageForUpdate.getImageDescription());
+                imageRepository.save(image);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
     }
 }
