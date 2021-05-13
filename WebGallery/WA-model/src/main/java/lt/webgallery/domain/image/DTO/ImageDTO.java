@@ -15,7 +15,7 @@ public class ImageDTO {
 
     private Long id;
 
-    private Byte[] image;
+    private byte[] image;
 
     private String imageName;
 
