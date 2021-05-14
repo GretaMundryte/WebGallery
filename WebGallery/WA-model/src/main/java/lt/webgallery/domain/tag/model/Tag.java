@@ -5,7 +5,7 @@ import lombok.Setter;
 import lt.webgallery.domain.image.model.Image;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +22,6 @@ public class Tag {
     private String tag;
 
     @Column
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tags")
-    List<Image> images;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
+    Set<Image> images;
 }
