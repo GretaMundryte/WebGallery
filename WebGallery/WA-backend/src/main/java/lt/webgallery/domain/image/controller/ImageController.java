@@ -1,6 +1,7 @@
 package lt.webgallery.domain.image.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lt.webgallery.domain.image.DTO.ImageDTO;
 import lt.webgallery.domain.image.service.ImageService;
 import org.springframework.http.HttpStatus;
@@ -33,15 +34,19 @@ public class ImageController {
         return imageService.search(query);
     }
 
-    @PostMapping(consumes = "multiplpart/form-data")
-//            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody ImageDTO createdImage, MultipartFile multipartFile) {
-        imageService.createImage(createdImage, multipartFile);
+    public void create(@RequestPart ImageDTO imageInfo, @RequestPart MultipartFile imageFIle) {
+        imageService.createImage(imageInfo, imageFIle);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         imageService.deleteImage(id);
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void update(@PathVariable("id") Long id, @RequestPart ImageDTO imageInfo, @RequestPart(required = false) MultipartFile imageFile) {
+        imageService.updateImage(id, imageInfo, imageFile);
     }
 }

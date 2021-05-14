@@ -3,15 +3,16 @@ package lt.webgallery.domain.image.model;
 import lombok.Getter;
 import lombok.Setter;
 import lt.webgallery.domain.tag.model.Tag;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "Images")
+@Table(name = "Image")
 public class Image {
 
     @Id
@@ -19,28 +20,26 @@ public class Image {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "image")
+    @Lob
+    @Column(name = "image", nullable = false)
     private byte[] image;
 
-    @Column(name = "image_name")
+    @Column(name = "image_name", nullable = false)
     private String imageName;
 
-    //pridet prie butinu lauku po column name skliaustuose: , nullable = false
-
-    @Column(name = "upload_date")
+    @Column(name = "upload_date", nullable = false)
     private LocalDate uploadDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "image_quality")
+    @Column(name = "image_quality", nullable = false)
     private ImageQuality imageQuality;
 
-    @Column(name = "image_description", length = 250)
+    @Column(name = "image_description", length = 250, nullable = false)
     private String imageDescription;
 
-    @Column(name = "imageTag")
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "image_tags", joinColumns = {@JoinColumn(name = "image_id")}, inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
     public void addTag(Tag tag) {
         tags.add(tag);
