@@ -1,0 +1,14 @@
+<div class="image">
+  <p>{{image?.file}}</p>
+  <h3>{{image?.imageName}}
+    <fa-icon
+      (click)="onDelete(image)"
+      [icon]="faTimes"
+    ></fa-icon>
+  </h3>
+  <p>{{image?.imageDescription}}</p>
+  <p>{{image?.imageQuality}}</p>
+  <div>{{image?.uploadDate}}</div>
+  <div>{{image?.tags}}</div>
+</div>
+

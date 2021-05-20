@@ -1,0 +1,6 @@
+<app-add-image></app-add-image>
+<app-image-item
+  *ngFor="let image of images"
+  [image]="image"
+  (onDeleteImage)="deleteImage(image)"
+></app-image-item>

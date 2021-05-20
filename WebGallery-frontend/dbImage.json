@@ -1,0 +1,67 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "image": "image",
+      "imageName": "rose",
+      "uploadDate": "2021",
+      "imageQuality": "LOW",
+      "imageDescription": "beautiful flower",
+      "tags": "flower"
+    },
+    {
+      "id": 2,
+      "image": "image",
+      "imageName": "tulip",
+      "uploadDate": "2021",
+      "imageQuality": "HIGH",
+      "imageDescription": "yellow blossom",
+      "tags": "flower"
+    },
+    {
+      "id": 3,
+      "image": "image",
+      "imageName": "oak",
+      "uploadDate": "2021",
+      "imageQuality": "HIGH",
+      "imageDescription": "high tree",
+      "tags": "tree"
+    },
+    {
+      "id": 4,
+      "image": "image",
+      "imageName": "test",
+      "uploadDate": "2021",
+      "imageQuality": "MEDIUM",
+      "imageDescription": "test",
+      "tags": "test"
+    },
+    {
+      "imageName": "test",
+      "imageDescription": "test",
+      "id": 5
+    },
+    {
+      "file": "C:\\fakepath\\leaves-5839550_1920.jpg",
+      "id": 7
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "tag": "flower"
+    },
+    {
+      "id": 2,
+      "tag": "beautiful"
+    },
+    {
+      "id": 3,
+      "tag": "tree"
+    },
+    {
+      "id": 4,
+      "tag": "test"
+    }
+  ]
+}
