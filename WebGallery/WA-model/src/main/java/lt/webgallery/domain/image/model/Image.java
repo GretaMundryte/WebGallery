@@ -3,7 +3,6 @@ package lt.webgallery.domain.image.model;
 import lombok.Getter;
 import lombok.Setter;
 import lt.webgallery.domain.tag.model.Tag;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,21 +20,23 @@ public class Image {
     private Long id;
 
     @Lob
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private byte[] image;
 
-    @Column(name = "image_name", nullable = false)
+    @Column(name = "image_name")
     private String imageName;
 
-    @Column(name = "upload_date", nullable = false)
+    @Column(name = "upload_date")
     private LocalDate uploadDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "image_quality", nullable = false)
+    @Column(name = "image_quality")
     private ImageQuality imageQuality;
 
-    @Column(name = "image_description", length = 250, nullable = false)
+    @Column(name = "image_description", length = 250)
     private String imageDescription;
+
+//    skliausteliuose, po name: , nullable = false
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "image_tags", joinColumns = {@JoinColumn(name = "image_id")}, inverseJoinColumns = {@JoinColumn(name = "tag_id")})

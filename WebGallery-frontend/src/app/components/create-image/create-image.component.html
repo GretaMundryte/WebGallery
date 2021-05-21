@@ -20,8 +20,8 @@
   </div>
   <div class="form-group">
     <label for="file"></label>
-    <input id="file" type="file" [(ngModel)]="image.file" name="file" class="form-control">
-<!--           (change)="onFileSelect($event)">-->
+    <input #fileUpload id="file" type="file" name="file" class="form-control"
+           (change)="onFileSelect($event)">
   </div>
   <button class="btn">Submit</button>
 </form>
