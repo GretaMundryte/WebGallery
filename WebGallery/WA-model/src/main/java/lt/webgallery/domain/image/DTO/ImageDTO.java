@@ -1,8 +1,6 @@
 package lt.webgallery.domain.image.DTO;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.ImageQuality;

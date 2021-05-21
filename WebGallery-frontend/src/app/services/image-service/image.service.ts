@@ -7,7 +7,8 @@ import {Image} from "../../components/images/image";
   providedIn: 'root'
 })
 export class ImageService {
-  private apiUrl = 'http://localhost:5000/images';
+  // private apiUrl = 'http://localhost:5000/images';
+  private apiUrl = 'http://localhost:8080/api/images';
 
   constructor(private http: HttpClient) {
   }
@@ -17,7 +18,16 @@ export class ImageService {
   }
 
   addImage(newImage: Image) {
-    return this.http.post(this.apiUrl, newImage)
+    const formData = new FormData();
+    formData.append('file', newImage.file);
+    formData.append('imageInfo', new Blob([JSON.stringify(newImage)], {
+      type: 'application/json'
+    }))
+
+    // (this.url, data, { headers: { enctype: 'multipart/form-data' } })
+
+    console.log(formData, newImage);
+    return this.http.post<void>(this.apiUrl, formData, {headers: {enctype: 'multipart/form-data'}});
   }
 
   updateImage(id: number, updatedImage: Image) {

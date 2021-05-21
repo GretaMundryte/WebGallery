@@ -1,7 +1,6 @@
 package lt.webgallery.domain.image.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lt.webgallery.domain.image.DTO.ImageDTO;
 import lt.webgallery.domain.image.service.ImageService;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/images")
 @RequiredArgsConstructor
@@ -36,8 +35,8 @@ public class ImageController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestPart ImageDTO imageInfo, @RequestPart MultipartFile imageFIle) {
-        imageService.createImage(imageInfo, imageFIle);
+    public void create(@RequestPart ImageDTO imageInfo, @RequestPart MultipartFile file) {
+        imageService.createImage(imageInfo, file);
     }
 
     @DeleteMapping("/{id}")
