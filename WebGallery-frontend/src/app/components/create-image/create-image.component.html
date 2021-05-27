@@ -7,8 +7,9 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Image quality</mat-label>
-      <mat-select matNativeControl required>
-        <mat-option *ngFor="let quality of qualityList" [value]="quality">{{quality}}</mat-option>
+      <mat-select matNativeControl required [(ngModel)]="image.imageQuality" name="quality">
+        <mat-option *ngFor="let quality of qualityList" [value]="quality">{{quality}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -20,10 +21,16 @@
   </div>
   <div class="form-group">
     <label for="file"></label>
-    <input #fileUpload id="file" type="file" name="file" class="form-control"
+    <input #fileUpload id="file" type="file" name="file" class="form-control" accept="image/*"
            (change)="onFileSelect($event)">
   </div>
-  <button class="btn">Submit</button>
+<!--  <div *ngIf="imageCondition">-->
+  <div *ngIf="imgUrl">
+    <img [src]="imgUrl" width="100" height="80" alt="_blank"/>
+  </div>
+  <div>
+    <button class="btn">Submit</button>
+  </div>
 </form>
 
 

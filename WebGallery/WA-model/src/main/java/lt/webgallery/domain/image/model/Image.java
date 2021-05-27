@@ -20,8 +20,9 @@ public class Image {
     private Long id;
 
     @Lob
-    @Column(name = "image")
-    private byte[] image;
+    @Column(name = "file")
+    private byte[] file;
+//    private String file;
 
     @Column(name = "image_name")
     private String imageName;
