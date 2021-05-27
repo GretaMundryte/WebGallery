@@ -2,6 +2,8 @@ package lt.webgallery.domain.image.service;
 
 import lombok.RequiredArgsConstructor;
 import lt.webgallery.domain.image.DTO.ImageDTO;
+import lt.webgallery.domain.image.DTO.ImageView;
+import lt.webgallery.domain.image.convertImage.ConvertImage;
 import lt.webgallery.domain.image.exceptions.ResourceNotFoundException;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.Image_;
@@ -21,25 +23,25 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    public List<ImageDTO> getAllImages() {
+    public List<ImageView> getAllImages() {
         return imageRepository.findAll()
                 .stream()
-                .map(ImageDTO::build)
+                .map(this::convertToImageView)
                 .collect(Collectors.toList());
     }
 
-    public ImageDTO getImageById(Long id) {
+    public ImageView getImageById(Long id) {
         return imageRepository
                 .findById(id)
-                .map(ImageDTO::build)
+                .map(this::convertToImageView)
                 .orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
     }
 
-    public List<ImageDTO> search(String keyword) {
+    public List<ImageView> search(String keyword) {
         Specification<Image> imageSpecification = (root, cq, cb) -> cb.or(cb.like(root.get(Image_.imageName), "%" + keyword + "%"),
                 cb.like(root.get(Image_.imageDescription), "%" + keyword + "%"));
         return imageRepository.findAll(imageSpecification).stream()
-                .map(ImageDTO::build)
+                .map(this::convertToImageView)
                 .collect(Collectors.toList());
     }
 
@@ -47,8 +49,9 @@ public class ImageService {
         Image image = new Image();
         try {
             image.setId(imageInfo.getId());
-            image.setImage(imageFile.getBytes());
-            image.setImageName(imageFile.getOriginalFilename());
+            image.setFile(imageFile.getBytes());
+//            image.setImageName(imageFile.getOriginalFilename());
+            image.setImageName(imageInfo.getImageName());
             image.setUploadDate(LocalDate.now());
             image.setImageQuality(imageInfo.getImageQuality());
             image.setImageDescription(imageInfo.getImageDescription());
@@ -62,20 +65,27 @@ public class ImageService {
         imageRepository.deleteById(id);
     }
 
-    public void updateImage(Long id, ImageDTO imageInfo, MultipartFile imageFile) {
+    public void updateImage(Long id, ImageDTO imageInfo, MultipartFile multipartFile) {
         Image image = imageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
 
-        if (imageFile != null) {
+        if (multipartFile != null) {
             try {
-                image.setImage(imageFile.getBytes());
-                image.setImageName(imageFile.getOriginalFilename());
+                image.setFile(multipartFile.getBytes());
+//                image.setImageName(multipartFile.getOriginalFilename());
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
         }
+        image.setImageName(imageInfo.getImageName());
         image.setUploadDate(LocalDate.now());
         image.setImageQuality(imageInfo.getImageQuality());
         image.setImageDescription(imageInfo.getImageDescription());
         imageRepository.save(image);
+    }
+
+    private ImageView convertToImageView(Image image) {
+        ImageView imageDTO = ImageView.build(image);
+        imageDTO.setFile(ConvertImage.encodeToString(image.getFile()));
+        return imageDTO;
     }
 }

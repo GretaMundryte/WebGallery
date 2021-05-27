@@ -5,7 +5,8 @@ import {CreateImageComponent} from "./components/create-image/create-image.compo
 
 const routes: Routes = [
   {path: 'listImages', component: ImagesComponent},
-  {path: 'createImage', component: CreateImageComponent}
+  {path: 'createImage', component: CreateImageComponent},
+  {path: 'edit/:id', component: CreateImageComponent}
 ];
 
 @NgModule({
