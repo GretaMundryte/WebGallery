@@ -3,7 +3,7 @@ import {Image} from "../images/image";
 import {Quality} from "../images/quality";
 import {ImageService} from "../../services/image-service/image.service";
 import {FormBuilder} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, Subscriber} from "rxjs";
 
 @Component({
@@ -17,15 +17,15 @@ export class CreateImageComponent implements OnInit {
   imageUrl: File;
   imgUrl: string;
 
-  constructor(private formBuilder: FormBuilder, private imageService: ImageService, private router: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private imageService: ImageService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   @ViewChild('fileUpload', {static: true})
   input: ElementRef<HTMLInputElement>;
 
   ngOnInit(): void {
-    if (this.router.snapshot.params.id) {
-      this.imageService.getCurrentData(this.router.snapshot.params.id).subscribe((result) => {
+    if (this.activatedRoute.snapshot.params.id) {
+      this.imageService.getCurrentData(this.activatedRoute.snapshot.params.id).subscribe((result) => {
         this.image = result;
         this.imageUrl = this.image.file;
       })
@@ -34,13 +34,12 @@ export class CreateImageComponent implements OnInit {
 
   onSubmit() {
     console.log(this.image);
-    if (!this.image.id) {
-      this.imageService.addImage(this.image).subscribe((res) => console.log(res),
-        (err) => console.log(err));
-    } else {
-      this.imageService.updateImage(this.router.snapshot.params.id, this.image).subscribe((result) =>
-        console.log(result));
-    }
+
+    const imageObservable = this.image.id
+      ? this.imageService.updateImage(this.activatedRoute.snapshot.params.id, this.image)
+      : this.imageService.addImage(this.image);
+
+    imageObservable.subscribe(() => this.router.navigate(['/listImages']));
   }
 
   onFileSelect($event: Event) {

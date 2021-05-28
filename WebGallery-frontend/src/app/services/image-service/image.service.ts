@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from 'rxjs'
+import {Observable, Subject} from 'rxjs'
 import {Image} from "../../components/images/image";
 
 @Injectable({
@@ -8,6 +8,8 @@ import {Image} from "../../components/images/image";
 })
 export class ImageService {
   private apiUrl = 'http://localhost:8080/api/images';
+
+  private refresh = new Subject<void>();
 
   constructor(private http: HttpClient) {
   }
@@ -24,7 +26,7 @@ export class ImageService {
     }))
 
     console.log(formData, newImage);
-    return this.http.post<void>(this.apiUrl, formData, {headers: {enctype: 'multipart/form-data'}});
+    return this.http.post<void>(this.apiUrl, formData, {headers: {enctype: 'multipart/form-data'}})
   }
 
   updateImage(id: number, updatedImage: Image): Observable<any> {
@@ -34,13 +36,8 @@ export class ImageService {
     formData.append('imageInfo', new Blob([JSON.stringify(updatedImage)], {
       type: 'application/json'
     }))
-
     console.log(formData, updatedImage);
     return this.http.put<void>(url, formData, {headers: {enctype: 'multipart/form-data'}});
-
-
-    // const endpointURl = this.apiUrl + "/edit/" + id;
-    // return this.http.put(endpointURl, updatedImage);
   }
 
   deleteImage(image: Image): Observable<Image> {
@@ -49,7 +46,8 @@ export class ImageService {
   }
 
   getCurrentData(id: number): Observable<Image> {
-    // return this.http.get<Image>(`${this.apiUrl}/${id}`);
     return this.http.get<Image>(`${this.apiUrl}/` + id);
   }
+
+
 }
