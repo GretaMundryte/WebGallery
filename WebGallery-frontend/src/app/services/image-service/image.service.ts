@@ -15,7 +15,7 @@ export class ImageService {
   }
 
   getImages(): Observable<Image[]> {
-    return this.http.get<Image[]>(this.apiUrl)
+    return this.http.get<Image[]>(this.apiUrl);
   }
 
   addImage(newImage: Image): Observable<void> {
@@ -23,8 +23,7 @@ export class ImageService {
     formData.append('file', newImage.file);
     formData.append('imageInfo', new Blob([JSON.stringify(newImage)], {
       type: 'application/json'
-    }))
-
+    }));
     console.log(formData, newImage);
     return this.http.post<void>(this.apiUrl, formData, {headers: {enctype: 'multipart/form-data'}})
   }
@@ -32,10 +31,10 @@ export class ImageService {
   updateImage(id: number, updatedImage: Image): Observable<any> {
     const url = this.apiUrl + "/edit/" + id;
     const formData = new FormData();
-    formData.append('file', updatedImage.file);
+    formData.append('multipartFile', updatedImage.file);
     formData.append('imageInfo', new Blob([JSON.stringify(updatedImage)], {
       type: 'application/json'
-    }))
+    }));
     console.log(formData, updatedImage);
     return this.http.put<void>(url, formData, {headers: {enctype: 'multipart/form-data'}});
   }

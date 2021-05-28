@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.ImageQuality;
+import lt.webgallery.domain.tag.model.Tag;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,7 @@ public class ImageView {
     private LocalDate uploadDate;
     private ImageQuality imageQuality;
     private String imageDescription;
+    private Tag tag;
 
     public static ImageView build(Image image) {
         ImageView dto = new ImageView();
@@ -24,6 +26,7 @@ public class ImageView {
         dto.setUploadDate(image.getUploadDate());
         dto.setImageQuality(image.getImageQuality());
         dto.setImageDescription(image.getImageDescription());
+//        dto.setTag(image.getTags());
         return dto;
     }
 }

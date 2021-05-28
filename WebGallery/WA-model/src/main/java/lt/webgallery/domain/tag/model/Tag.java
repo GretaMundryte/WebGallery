@@ -5,12 +5,12 @@ import lombok.Setter;
 import lt.webgallery.domain.image.model.Image;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "Tags")
+@Table(name = "Tag")
 public class Tag {
 
     @Id
@@ -23,5 +23,5 @@ public class Tag {
 
     @Column
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
-    Set<Image> images;
+    List<Image> images;
 }
