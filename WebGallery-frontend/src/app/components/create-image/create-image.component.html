@@ -24,7 +24,6 @@
     <input #fileUpload id="file" type="file" name="file" class="form-control" accept="image/*"
            (change)="onFileSelect($event)">
   </div>
-<!--  <div *ngIf="imageCondition">-->
   <div *ngIf="imgUrl">
     <img [src]="imgUrl" width="100" height="80" alt="_blank"/>
   </div>
@@ -34,5 +33,6 @@
 </form>
 
 
+<!--[routerLink]="'/listImages'"-->
 <!--tag iskelt is component-->
 <!--//[(ngModel)]="image.imageName" name="name"-->
