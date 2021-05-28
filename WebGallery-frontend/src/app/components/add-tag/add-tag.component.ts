@@ -21,7 +21,7 @@ export class AddTagComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tagService.getTags().subscribe((tags) => (this.tags = tags))
+    this.tagService.getTags().subscribe((tags) => (this.tags = tags));
   }
 
   // deleteTag(tag: Tag) {

@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class TagService {
-  private apiUrl = 'http://localhost:5000/tags';
+  private apiUrl = 'http://localhost:8080/api/tags';
 
   constructor(private http: HttpClient) {
   }

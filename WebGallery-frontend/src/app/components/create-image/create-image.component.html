@@ -13,7 +13,22 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <!--  <app-add-tag></app-add-tag>-->
+  <!--    <app-add-tag></app-add-tag>-->
+  <mat-form-field class="example-chip-list">
+    <mat-label>Image tags..</mat-label>
+    <mat-chip-list #chipList aria-label="Tag selection">
+      <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                [removable]="removable" (removed)="removeTag(tag)">
+        {{tag}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="New tag..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="addTag($event)">
+    </mat-chip-list>
+  </mat-form-field>
   <div class="form-group">
     <label for="description"></label>
     <textarea id="description" cols="30" rows="10" class="form-control" [(ngModel)]="image.imageDescription"

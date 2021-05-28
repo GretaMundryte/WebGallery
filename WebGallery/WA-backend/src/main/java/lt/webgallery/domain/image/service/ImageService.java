@@ -50,7 +50,6 @@ public class ImageService {
         try {
             image.setId(imageInfo.getId());
             image.setFile(imageFile.getBytes());
-//            image.setImageName(imageFile.getOriginalFilename());
             image.setImageName(imageInfo.getImageName());
             image.setUploadDate(LocalDate.now());
             image.setImageQuality(imageInfo.getImageQuality());
@@ -71,7 +70,6 @@ public class ImageService {
         if (multipartFile != null) {
             try {
                 image.setFile(multipartFile.getBytes());
-//                image.setImageName(multipartFile.getOriginalFilename());
             } catch (IOException exception) {
                 exception.printStackTrace();
             }

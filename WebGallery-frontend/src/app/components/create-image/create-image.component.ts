@@ -5,6 +5,10 @@ import {ImageService} from "../../services/image-service/image.service";
 import {FormBuilder} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, Subscriber} from "rxjs";
+import {Tag} from "../images/tag";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {TagService} from "../../services/tag-service/tag.service";
+import {MatChipInputEvent} from "@angular/material/chips";
 
 @Component({
   selector: 'app-create-image',
@@ -14,10 +18,16 @@ import {Observable, Subscriber} from "rxjs";
 export class CreateImageComponent implements OnInit {
   image: Image = new Image();
   qualityList = Object.values(Quality);
-  imageUrl: File;
   imgUrl: string;
 
-  constructor(private formBuilder: FormBuilder, private imageService: ImageService, private activatedRoute: ActivatedRoute, private router: Router) {
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  tags: string[] = [];
+
+  constructor(private formBuilder: FormBuilder, private imageService: ImageService, private activatedRoute: ActivatedRoute, private router: Router, private tagService: TagService) {
   }
 
   @ViewChild('fileUpload', {static: true})
@@ -27,18 +37,15 @@ export class CreateImageComponent implements OnInit {
     if (this.activatedRoute.snapshot.params.id) {
       this.imageService.getCurrentData(this.activatedRoute.snapshot.params.id).subscribe((result) => {
         this.image = result;
-        this.imageUrl = this.image.file;
       })
     }
+    this.tagService.getTags().subscribe((tags) => (this.tags = tags))
   }
 
   onSubmit() {
-    console.log(this.image);
-
     const imageObservable = this.image.id
       ? this.imageService.updateImage(this.activatedRoute.snapshot.params.id, this.image)
       : this.imageService.addImage(this.image);
-
     imageObservable.subscribe(() => this.router.navigate(['/listImages']));
   }
 
@@ -72,4 +79,37 @@ export class CreateImageComponent implements OnInit {
       subscriber.complete();
     }
   }
+
+  //TAG DALIS!!!
+
+  addTag(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    const input = event.input;
+
+    if (value) {
+      // this.tags.push(value);
+      this.image.tags.push(value);
+      input.value = '';
+    }
+    // event.chipInput!.clear();
+    // event.input!.remove();
+  }
+
+
+  removeTag(tag: string): void {
+    // const index = this.tags.indexOf(tag);
+    const index = this.image.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+    // this.tagService.deleteTag(tag)
+    //   .subscribe(() => (this.tags = this.tags.filter(tg => tg.id !== tag.id)));
+  }
+
+  // deleteTag(tag: Tag) {
+  //   this.tagService.deleteTag(tag)
+  //     .subscribe(() => (this.tags = this.tags.filter(tg => tg.id !== tag.id)));
+  // }
+
 }

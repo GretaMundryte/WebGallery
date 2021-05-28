@@ -6,6 +6,7 @@ import lt.webgallery.domain.tag.model.Tag;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,7 +42,7 @@ public class Image {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "image_tags", joinColumns = {@JoinColumn(name = "image_id")}, inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    private Set<Tag> tags;
+    private List<Tag> tags;
 
     public void addTag(Tag tag) {
         tags.add(tag);
