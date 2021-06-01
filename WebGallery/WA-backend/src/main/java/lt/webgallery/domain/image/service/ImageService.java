@@ -8,12 +8,15 @@ import lt.webgallery.domain.image.exceptions.ResourceNotFoundException;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.Image_;
 import lt.webgallery.domain.image.repository.ImageRepository;
+import lt.webgallery.domain.tag.model.Tag;
+import lt.webgallery.domain.tag.repository.TagRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class ImageService {
 
     private final ImageRepository imageRepository;
+    private final TagRepository tagRepository;
 
     public List<ImageView> getAllImages() {
         return imageRepository.findAll()
@@ -47,6 +51,7 @@ public class ImageService {
 
     public void createImage(ImageDTO imageInfo, MultipartFile imageFile) {
         Image image = new Image();
+        Tag[] tags;
         try {
             image.setId(imageInfo.getId());
             image.setFile(imageFile.getBytes());
@@ -54,6 +59,11 @@ public class ImageService {
             image.setUploadDate(LocalDate.now());
             image.setImageQuality(imageInfo.getImageQuality());
             image.setImageDescription(imageInfo.getImageDescription());
+            if (imageInfo.getTags() != null) {
+                for (int i = 0; i < imageInfo.getTags().length; i++) {
+                    image.getTags().add(imageInfo.getTags()[i]);
+                }
+            }
             imageRepository.save(image);
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -78,6 +88,11 @@ public class ImageService {
         image.setUploadDate(LocalDate.now());
         image.setImageQuality(imageInfo.getImageQuality());
         image.setImageDescription(imageInfo.getImageDescription());
+        if (imageInfo.getTags() != null) {
+            for (int i = 0; i < imageInfo.getTags().length; i++) {
+                image.getTags().add(imageInfo.getTags()[i]);
+            }
+        }
         imageRepository.save(image);
     }
 
@@ -86,4 +101,12 @@ public class ImageService {
         imageDTO.setFile(ConvertImage.encodeToString(image.getFile()));
         return imageDTO;
     }
+
+    //tag service dalis
+
+//    public void createTag(Tag providedTag) {
+//        Tag tag = new Tag();
+//        tag.setId(providedTag.getId());
+//        tag.setTag(providedTag.getTag());
+//    }
 }

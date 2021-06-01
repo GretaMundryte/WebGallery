@@ -18,6 +18,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -31,20 +32,21 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CreateImageComponent,
     AddTagComponent
   ],
-    imports: [
-        BrowserModule,
-        MatSelectModule,
-        FontAwesomeModule,
-        HttpClientModule,
-        AppRoutingModule,
-        NoopAnimationsModule,
-        MatChipsModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatOptionModule,
-        FormsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    MatSelectModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatOptionModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

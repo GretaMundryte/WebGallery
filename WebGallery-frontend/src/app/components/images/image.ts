@@ -1,4 +1,5 @@
 import {Quality} from "./quality";
+import {Tag} from "./tag";
 
 export class Image {
   id: number;
@@ -7,5 +8,5 @@ export class Image {
   uploadDate: Date;
   imageQuality: Quality;
   imageDescription: string;
-  tags: string[];
+  tags: Tag[] = [];
 }
