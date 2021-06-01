@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, Subject} from 'rxjs'
 import {Image} from "../../components/images/image";
+import {Tag} from "../../components/add-tag/tag";
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,14 @@ export class ImageService {
     return this.http.get<Image>(`${this.apiUrl}/` + id);
   }
 
+  //tag service
 
+  getTags(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl)
+  }
+
+  deleteTag(tag: Tag): Observable<Tag> {
+    const url = `${this.apiUrl}/${tag.id}`;
+    return this.http.delete<Tag>(url);
+  }
 }

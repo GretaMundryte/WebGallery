@@ -6,6 +6,7 @@ import lt.webgallery.domain.tag.model.Tag;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +24,6 @@ public class Image {
     @Lob
     @Column(name = "file")
     private byte[] file;
-//    private String file;
 
     @Column(name = "image_name")
     private String imageName;
@@ -40,9 +40,9 @@ public class Image {
 
 //    skliausteliuose, po name: , nullable = false
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinTable(name = "image_tags", joinColumns = {@JoinColumn(name = "image_id")}, inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<>();
 
     public void addTag(Tag tag) {
         tags.add(tag);

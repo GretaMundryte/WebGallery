@@ -16,5 +16,5 @@ public class ImageDTO {
     private LocalDate uploadDate;
     private ImageQuality imageQuality;
     private String imageDescription;
-    private Tag tag;
+    private Tag[] tags;
 }

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Tag} from "./tag";
-import {TagService} from "../../services/tag-service/tag.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 
 @Component({
@@ -17,11 +16,10 @@ export class AddTagComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: string[] = [];
 
-  constructor(private tagService: TagService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.tagService.getTags().subscribe((tags) => (this.tags = tags));
   }
 
   // deleteTag(tag: Tag) {

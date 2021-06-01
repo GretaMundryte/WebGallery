@@ -7,7 +7,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, Subscriber} from "rxjs";
 import {Tag} from "../images/tag";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {TagService} from "../../services/tag-service/tag.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 
 @Component({
@@ -25,9 +24,10 @@ export class CreateImageComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  tags: string[] = [];
+  // tags: string[] = [];
+  tags: Tag[] = [];
 
-  constructor(private formBuilder: FormBuilder, private imageService: ImageService, private activatedRoute: ActivatedRoute, private router: Router, private tagService: TagService) {
+  constructor(private formBuilder: FormBuilder, private imageService: ImageService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   @ViewChild('fileUpload', {static: true})
@@ -39,7 +39,6 @@ export class CreateImageComponent implements OnInit {
         this.image = result;
       })
     }
-    this.tagService.getTags().subscribe((tags) => (this.tags = tags))
   }
 
   onSubmit() {
@@ -80,36 +79,19 @@ export class CreateImageComponent implements OnInit {
     }
   }
 
-  //TAG DALIS!!!
-
   addTag(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     const input = event.input;
-
     if (value) {
-      // this.tags.push(value);
-      this.image.tags.push(value);
+      this.image.tags.push(new Tag(value));
       input.value = '';
     }
-    // event.chipInput!.clear();
-    // event.input!.remove();
   }
 
-
-  removeTag(tag: string): void {
-    // const index = this.tags.indexOf(tag);
-    const index = this.image.tags.indexOf(tag);
-
+  removeTag(tag: Tag): void {
+    const index = this.tags.indexOf(tag);
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
-    // this.tagService.deleteTag(tag)
-    //   .subscribe(() => (this.tags = this.tags.filter(tg => tg.id !== tag.id)));
   }
-
-  // deleteTag(tag: Tag) {
-  //   this.tagService.deleteTag(tag)
-  //     .subscribe(() => (this.tags = this.tags.filter(tg => tg.id !== tag.id)));
-  // }
-
 }

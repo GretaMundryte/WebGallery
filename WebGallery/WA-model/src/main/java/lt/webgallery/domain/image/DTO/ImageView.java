@@ -5,8 +5,11 @@ import lombok.Setter;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.ImageQuality;
 import lt.webgallery.domain.tag.model.Tag;
+import org.springframework.web.servlet.View;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -17,7 +20,7 @@ public class ImageView {
     private LocalDate uploadDate;
     private ImageQuality imageQuality;
     private String imageDescription;
-    private Tag tag;
+    private List<String> tags;
 
     public static ImageView build(Image image) {
         ImageView dto = new ImageView();
@@ -26,7 +29,7 @@ public class ImageView {
         dto.setUploadDate(image.getUploadDate());
         dto.setImageQuality(image.getImageQuality());
         dto.setImageDescription(image.getImageDescription());
-//        dto.setTag(image.getTags());
+        dto.setTags(image.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
         return dto;
     }
 }
