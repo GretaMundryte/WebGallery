@@ -1,16 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, Subject} from 'rxjs'
+import {HttpClient} from "@angular/common/http";
+import {Observable} from 'rxjs'
 import {Image} from "../../components/images/image";
-import {Tag} from "../../components/add-tag/tag";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
   private apiUrl = 'http://localhost:8080/api/images';
-
-  private refresh = new Subject<void>();
 
   constructor(private http: HttpClient) {
   }
@@ -47,16 +44,5 @@ export class ImageService {
 
   getCurrentData(id: number): Observable<Image> {
     return this.http.get<Image>(`${this.apiUrl}/` + id);
-  }
-
-  //tag service
-
-  getTags(): Observable<string[]> {
-    return this.http.get<string[]>(this.apiUrl)
-  }
-
-  deleteTag(tag: Tag): Observable<Tag> {
-    const url = `${this.apiUrl}/${tag.id}`;
-    return this.http.delete<Tag>(url);
   }
 }

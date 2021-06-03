@@ -20,7 +20,7 @@ public class ImageView {
     private LocalDate uploadDate;
     private ImageQuality imageQuality;
     private String imageDescription;
-    private List<String> tags;
+    private List<Tag> tags;
 
     public static ImageView build(Image image) {
         ImageView dto = new ImageView();
@@ -29,7 +29,8 @@ public class ImageView {
         dto.setUploadDate(image.getUploadDate());
         dto.setImageQuality(image.getImageQuality());
         dto.setImageDescription(image.getImageDescription());
-        dto.setTags(image.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
+//        dto.setTags(image.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
+        dto.setTags(image.getTags());
         return dto;
     }
 }

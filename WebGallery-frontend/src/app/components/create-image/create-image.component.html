@@ -13,7 +13,6 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <!--    <app-add-tag></app-add-tag>-->
   <mat-form-field class="chip-list">
     <mat-label>Image tags..</mat-label>
     <mat-chip-list #chipList aria-label="Tag selection">
@@ -36,7 +35,8 @@
   </div>
   <div class="form-group">
     <label for="file"></label>
-    <input #fileUpload id="file" type="file" name="file" class="form-control" accept="image/*"
+    <input #fileUpload id="file" type="file" name="file" class="form-control"
+           accept="image/*"
            (change)="onFileSelect($event)">
   </div>
   <div *ngIf="imgUrl">
@@ -46,8 +46,3 @@
     <button class="btn">Submit</button>
   </div>
 </form>
-
-
-<!--[routerLink]="'/listImages'"-->
-<!--tag iskelt is component-->
-<!--//[(ngModel)]="image.imageName" name="name"-->

@@ -24,8 +24,7 @@ export class CreateImageComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  // tags: string[] = [];
-  tags: Tag[] = [];
+  tagsToString: string;
 
   constructor(private formBuilder: FormBuilder, private imageService: ImageService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
@@ -83,15 +82,16 @@ export class CreateImageComponent implements OnInit {
     const value = (event.value || '').trim();
     const input = event.input;
     if (value) {
+      // this.image.tags.push({ tag: value });
       this.image.tags.push(new Tag(value));
       input.value = '';
     }
   }
 
   removeTag(tag: Tag): void {
-    const index = this.tags.indexOf(tag);
+    const index = this.image.tags.indexOf(tag);
     if (index >= 0) {
-      this.tags.splice(index, 1);
+      this.image.tags.splice(index, 1);
     }
   }
 }

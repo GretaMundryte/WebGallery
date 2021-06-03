@@ -13,12 +13,13 @@ import {ImageItemComponent} from './components/image-item/image-item.component';
 import {AddImageComponent} from './components/add-image/add-image.component';
 import {CreateImageComponent} from './components/create-image/create-image.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {AddTagComponent} from './components/add-tag/add-tag.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -30,23 +31,24 @@ import {MatInputModule} from '@angular/material/input';
     AddImageComponent,
     routingComponents,
     CreateImageComponent,
-    AddTagComponent
+    FilterPipe
   ],
-  imports: [
-    BrowserModule,
-    MatSelectModule,
-    FontAwesomeModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NoopAnimationsModule,
-    MatChipsModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatOptionModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        MatSelectModule,
+        FontAwesomeModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NoopAnimationsModule,
+        MatChipsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatOptionModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatAutocompleteModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

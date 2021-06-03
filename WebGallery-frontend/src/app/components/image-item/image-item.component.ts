@@ -15,7 +15,9 @@ export class ImageItemComponent implements OnInit {
   onDeleteImage: EventEmitter<Image> = new EventEmitter();
   faTimes = faTimes;
 
-
+  get tagNames() {
+    return this.image?.tags?.map(tag => tag.tag);
+  }
 
   constructor() {
   }

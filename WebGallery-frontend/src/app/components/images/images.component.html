@@ -1,6 +1,30 @@
 <app-add-image></app-add-image>
+<!--search su autocomplete-->
+<!--<form class="example-form">-->
+<!--  <input type="text"-->
+<!--         placeholder="Search"-->
+<!--         [formControl]="control"-->
+<!--         [matAutocomplete]="auto">-->
+<!--  <mat-autocomplete #auto="matAutocomplete">-->
+<!--&lt;!&ndash;    <mat-option *ngFor="let name of filteredSearch" [value]="name">&ndash;&gt;-->
+<!--&lt;!&ndash;      {{name}}&ndash;&gt;-->
+<!--&lt;!&ndash;    </mat-option>&ndash;&gt;-->
+<!--  </mat-autocomplete>-->
+<!--</form>-->
+
+<!--simple search-->
+<!--<div class="search-hero">-->
+<!--  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="Search">-->
+<!--</div>-->
+
+<div class="form-group">
+  <input type="text" class="form-control" id="search-text" aria-describedby="search-text"
+         [(ngModel)]="searchText" placeholder="Enter text to search"
+         autofocus>
+</div>
+
+
 <app-image-item
   *ngFor="let image of images"
   [image]="image"
-  (onDeleteImage)="deleteImage(image)"
-></app-image-item>
+  (onDeleteImage)="deleteImage(image)"></app-image-item>

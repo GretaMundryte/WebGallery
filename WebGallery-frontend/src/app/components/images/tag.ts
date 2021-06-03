@@ -1,7 +1,10 @@
 export class Tag {
+  id?: string;
   tag: string;
 
-  constructor(tagName: string) {
-    this.tag = tagName;
+
+  constructor(tag: string) {
+    this.tag = tag;
   }
 }
+
