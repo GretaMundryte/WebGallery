@@ -51,7 +51,6 @@ public class ImageService {
 
     public void createImage(ImageDTO imageInfo, MultipartFile imageFile) {
         Image image = new Image();
-        Tag[] tags;
         try {
             image.setId(imageInfo.getId());
             image.setFile(imageFile.getBytes());
@@ -59,11 +58,20 @@ public class ImageService {
             image.setUploadDate(LocalDate.now());
             image.setImageQuality(imageInfo.getImageQuality());
             image.setImageDescription(imageInfo.getImageDescription());
-            if (imageInfo.getTags() != null) {
-                for (int i = 0; i < imageInfo.getTags().length; i++) {
-                    image.getTags().add(imageInfo.getTags()[i]);
-                }
-            }
+//            if (imageInfo.getTags() != null) {
+//                }
+
+
+//            image.getTags().addAll(imageInfo.getTags());
+//            if (imageInfo.getTags() != null) {
+//                image.getTags().addAll(imageInfo.getTags());
+//            }
+
+            image.setTags(imageInfo.getTags());
+
+//            image.setTags().addAll(imageInfo.getTags());
+
+
             imageRepository.save(image);
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -88,11 +96,15 @@ public class ImageService {
         image.setUploadDate(LocalDate.now());
         image.setImageQuality(imageInfo.getImageQuality());
         image.setImageDescription(imageInfo.getImageDescription());
-        if (imageInfo.getTags() != null) {
-            for (int i = 0; i < imageInfo.getTags().length; i++) {
-                image.getTags().add(imageInfo.getTags()[i]);
-            }
-        }
+//        if (imageInfo.getTags() != null) {
+//            for (int i = 0; i < imageInfo.getTags().size(); i++) {
+//                image.getTags().add(image.getTags().get(i));
+//            }
+//        }
+//                image.getTags().addAll(imageInfo.getTags());
+
+        image.setTags(imageInfo.getTags());
+
         imageRepository.save(image);
     }
 

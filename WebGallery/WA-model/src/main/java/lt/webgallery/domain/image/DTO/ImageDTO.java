@@ -6,6 +6,7 @@ import lt.webgallery.domain.image.model.ImageQuality;
 import lt.webgallery.domain.tag.model.Tag;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,5 +17,5 @@ public class ImageDTO {
     private LocalDate uploadDate;
     private ImageQuality imageQuality;
     private String imageDescription;
-    private Tag[] tags;
+    private List<Tag> tags;
 }
