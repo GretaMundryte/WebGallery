@@ -22,7 +22,6 @@ export class ImageService {
     formData.append('imageInfo', new Blob([JSON.stringify(newImage)], {
       type: 'application/json'
     }));
-    console.log(formData, newImage);
     return this.http.post<void>(this.apiUrl, formData, {headers: {enctype: 'multipart/form-data'}})
   }
 
@@ -33,7 +32,6 @@ export class ImageService {
     formData.append('imageInfo', new Blob([JSON.stringify(updatedImage)], {
       type: 'application/json'
     }));
-    console.log(formData, updatedImage);
     return this.http.put<void>(url, formData, {headers: {enctype: 'multipart/form-data'}});
   }
 
@@ -44,5 +42,9 @@ export class ImageService {
 
   getCurrentData(id: number): Observable<Image> {
     return this.http.get<Image>(`${this.apiUrl}/` + id);
+  }
+
+  getImageBySearch(keyword: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search/${keyword}`);
   }
 }

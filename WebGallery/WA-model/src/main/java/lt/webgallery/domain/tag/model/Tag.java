@@ -20,8 +20,4 @@ public class Tag {
 
     @Column(name = "tag")
     private String tag;
-//
-//    @Column
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
-//    List<Image> images;
 }

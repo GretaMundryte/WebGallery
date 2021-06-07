@@ -1,7 +1,16 @@
 header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+h1 {
+  display: flex;
+  justify-content:flex-start;
+}
+
+.register {
+  position: absolute;
+  right: 60px;
 }
 

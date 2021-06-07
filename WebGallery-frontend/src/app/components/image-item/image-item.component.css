@@ -5,8 +5,6 @@
   cursor: pointer;
 }
 
-.image h3 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+fa-icon {
+  float: right
 }

@@ -20,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { FilterPipe } from './filter.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FilterPipe } from './filter.pipe';
         FormsModule,
         ReactiveFormsModule,
         MatInputModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        NgbModule
     ],
   providers: [],
   bootstrap: [AppComponent]

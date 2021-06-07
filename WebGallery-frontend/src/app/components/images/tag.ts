@@ -1,5 +1,5 @@
 export class Tag {
-  id?: string;
+  id?: number;
   tag: string;
 
 
