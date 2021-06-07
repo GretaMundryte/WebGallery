@@ -52,7 +52,6 @@ export class CreateImageComponent implements OnInit {
 
     // @ts-ignore
     const file = ($event.target as HTMLInputElement).files[0];
-    console.log(file);
     this.convertToBase64(file);
   }
 

@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ImageService} from "../../services/image-service/image.service";
 import {Image} from "./image";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FormControl} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-images',
@@ -12,19 +11,16 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ImagesComponent implements OnInit {
   images: Image[] = [];
-  allImages: Image[] = [];
   faTimes = faTimes;
-  imageNames: string[];
-  searchTerm: string;
-  control = new FormControl();
-  searchText = '';
+  faSearch = faSearch;
+  keyword: string = "";
 
-  constructor(private imageService: ImageService, private http: HttpClient) {
+  constructor(private imageService: ImageService) {
   }
 
   ngOnInit(): void {
-    this.imageService.getImages().subscribe(images => {
-      this.images = images;
+    this.imageService.getImages().subscribe(img => {
+      this.images = img;
     });
   }
 
@@ -33,7 +29,9 @@ export class ImagesComponent implements OnInit {
       .subscribe(() => (this.images = this.images.filter(img => img.id !== image.id)));
   }
 
-  search(value: string): void {
-    // this.images = this.allImages.filter((val) => val.imageName.toLowerCase().includes(value));
+  onSearch() {
+    this.imageService.getImageBySearch(this.keyword).subscribe(img => {
+      this.images = img
+    });
   }
 }
