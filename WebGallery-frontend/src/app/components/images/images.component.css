@@ -1,4 +1,14 @@
 .input-group {
-  padding-bottom: 12px;
+  padding-bottom: 13px;
 }
 
+.form-control {
+  width: 75%;
+  float:left;
+  height: 42px;
+}
+
+.btn {
+  margin: 20px 0;
+  height: 42px;
+}

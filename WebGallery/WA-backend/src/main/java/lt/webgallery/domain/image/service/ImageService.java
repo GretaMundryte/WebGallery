@@ -8,22 +8,14 @@ import lt.webgallery.domain.image.exceptions.ResourceNotFoundException;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.Image_;
 import lt.webgallery.domain.image.repository.ImageRepository;
-import lt.webgallery.domain.tag.DTO.TagDTO;
-import lt.webgallery.domain.tag.model.Tag;
 import lt.webgallery.domain.tag.model.Tag_;
-import lt.webgallery.domain.tag.repository.TagRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityManager;
-import javax.persistence.JoinTable;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,28 +39,18 @@ public class ImageService {
                 .orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
     }
 
-//    public List<ImageView> search(String keyword) {
-//        Specification<Image> imageSpecification = (root, cq, cb) -> {
-//            final Subquery<Long> subquery = cq.subquery(Long.class);
-//            final Root<Image> imageRoot = subquery.from(Image.class);
-//
-//            subquery.select(imageRoot.get(Image_.id));
-//            subquery.where(cb.equal(root.get(Image_.id), imageRoot.get(Image_.id)));
-//
-//
-//            return cb.or(
-//                    cb.in(root.get(Image_.id)).value(subquery),
-//                    cb.like(root.get(Image_.imageName), "%" + keyword + "%")
-//            );
-//        };
-//        return imageRepository.findAll(imageSpecification).stream()
-//                .map(this::convertToImageView)
-//                .collect(Collectors.toList());
-//    }
-
     public List<ImageView> search(String keyword) {
+        Specification<Image> imageSpecification = (root, cq, cb) -> {
+            final Subquery<Long> subquery = cq.subquery(Long.class);
+            final Root<Image> imageRoot = subquery.from(Image.class);
+            subquery.select(imageRoot.get(Image_.id));
+            subquery.where(cb.like(imageRoot.join(Image_.tags).get(Tag_.tag), "%" + keyword + "%"));
+            return cb.or(
+                    cb.in(root.get(Image_.id)).value(subquery),
+                    cb.like(root.get(Image_.imageName), "%" + keyword + "%"));
+        };
         return imageRepository
-                .findByTags_TagOrImageNameLike(keyword, "%" + keyword + "%")
+                .findAll(imageSpecification)
                 .stream()
                 .map(this::convertToImageView)
                 .collect(Collectors.toList());

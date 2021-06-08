@@ -6,8 +6,8 @@
     ></fa-icon>
   </h4>
   <img [src]="'data:image/jpg;base64,' + image?.file" width="100" height="80" alt="_blank"/>
-  <p>Description: <b>{{image?.imageDescription}}</b></p>
-  <p>Quality: <b>{{image?.imageQuality}}</b></p>
+  <div>Description: <b>{{image?.imageDescription}}</b></div>
+  <div>Quality: <b>{{image?.imageQuality}}</b></div>
   <div>Upload date: <b>{{image?.uploadDate}}</b></div>
   <div>Tags: <b>{{tagNames}}</b></div>
   <app-button text="Edit" [routerLink]="'/edit/' + image.id"></app-button>

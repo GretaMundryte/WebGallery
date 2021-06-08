@@ -29,9 +29,9 @@ public class ImageController {
         return imageService.getImageById(id);
     }
 
-    @GetMapping("/search/{query}")
-    public List<ImageView> findByDescription(@PathVariable("query") String query) {
-        return imageService.search(query);
+    @GetMapping("/search/{keyword}")
+    public List<ImageView> findByDescription(@PathVariable("keyword") String keyword) {
+            return imageService.search(keyword);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

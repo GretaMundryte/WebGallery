@@ -45,6 +45,10 @@ export class ImageService {
   }
 
   getImageBySearch(keyword: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search/${keyword}`);
+    if (keyword) {
+      return this.http.get(`${this.apiUrl}/search/${keyword}`);
+    } else {
+      return this.http.get<Image[]>(this.apiUrl);
+    }
   }
 }

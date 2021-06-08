@@ -29,7 +29,6 @@ public class ImageView {
         dto.setUploadDate(image.getUploadDate());
         dto.setImageQuality(image.getImageQuality());
         dto.setImageDescription(image.getImageDescription());
-//        dto.setTags(image.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
         dto.setTags(image.getTags());
         return dto;
     }
