@@ -1,5 +1,5 @@
 <form (ngSubmit)="onSubmit()">
-  <div class="form-group">
+  <div class="form-group w-25">
     <label for="name"></label>
     <input id="name" type="text" class="form-control" [(ngModel)]="image.imageName" name="name"
            placeholder="Image name..">
@@ -30,12 +30,12 @@
   </mat-form-field>
   <div class="form-group">
     <label for="description"></label>
-    <textarea id="description" cols="30" rows="10" class="form-control" [(ngModel)]="image.imageDescription"
+    <textarea id="description" cols="10" rows="5" class="form-control w-25" [(ngModel)]="image.imageDescription"
               name="description" placeholder="Image description.."></textarea>
   </div>
   <div class="form-group">
     <label for="file"></label>
-    <input #fileUpload id="file" type="file" name="file" class="form-control"
+    <input #fileUpload id="file" type="file" name="file" class="form-control w-25"
            accept="image/*"
            (change)="onFileSelect($event)">
   </div>
