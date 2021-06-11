@@ -21,7 +21,7 @@ public class Image {
     private Long id;
 
     @Lob
-    @Column(name = "file")
+    @Column(name = "file", nullable = false)
     private byte[] file;
 
     @Column(name = "image_name")
@@ -36,8 +36,6 @@ public class Image {
 
     @Column(name = "image_description", length = 250)
     private String imageDescription;
-
-//    skliausteliuose, po name: , nullable = false
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinTable(name = "image_tags", joinColumns = {@JoinColumn(name = "image_id")}, inverseJoinColumns = {@JoinColumn(name = "tag_id")})

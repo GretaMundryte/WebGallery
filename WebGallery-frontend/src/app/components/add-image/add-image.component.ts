@@ -14,5 +14,4 @@ export class AddImageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

@@ -5,11 +5,9 @@ import lombok.Setter;
 import lt.webgallery.domain.image.model.Image;
 import lt.webgallery.domain.image.model.ImageQuality;
 import lt.webgallery.domain.tag.model.Tag;
-import org.springframework.web.servlet.View;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter

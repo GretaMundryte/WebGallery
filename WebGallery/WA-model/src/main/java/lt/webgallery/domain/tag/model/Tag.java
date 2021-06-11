@@ -2,10 +2,8 @@ package lt.webgallery.domain.tag.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.webgallery.domain.image.model.Image;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter

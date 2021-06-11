@@ -18,7 +18,6 @@ export class CreateImageComponent implements OnInit {
   image: Image = new Image();
   qualityList = Object.values(Quality);
   imgUrl: string;
-
   visible = true;
   selectable = true;
   removable = true;
@@ -81,7 +80,6 @@ export class CreateImageComponent implements OnInit {
     const value = (event.value || '').trim();
     const input = event.input;
     if (value) {
-      // this.image.tags.push({ tag: value });
       this.image.tags.push(new Tag(value));
       input.value = '';
     }

@@ -30,7 +30,7 @@ public class ImageController {
 
     @GetMapping("/search/{keyword}")
     public List<ImageView> findByDescription(@PathVariable("keyword") String keyword) {
-            return imageService.search(keyword);
+        return imageService.search(keyword);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

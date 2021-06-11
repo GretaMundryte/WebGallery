@@ -78,7 +78,6 @@ public class ImageService {
 
     public void updateImage(Long id, ImageDTO imageInfo, MultipartFile multipartFile) {
         Image image = imageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image with id: " + id + " does not exist."));
-
         if (multipartFile != null) {
             try {
                 image.setFile(multipartFile.getBytes());

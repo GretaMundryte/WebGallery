@@ -1,6 +1,6 @@
 #FileLock
-#Thu Jun 10 16:07:36 EEST 2021
-server=10.10.16.64\:57656
-hostName=GRETAMUNDRYTE.x.insoft.lt
+#Fri Jun 11 14:19:27 EEST 2021
+server=192.168.1.107\:53737
+hostName=LAPTOP-AGJ7N2K1
 method=file
-id=179f608fbe886562872b9248ae57ec13ce490e9112a
+id=179facc40161c1651e49cc5d267019bd787d769bc06

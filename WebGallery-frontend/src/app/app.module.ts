@@ -19,8 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import { FilterPipe } from './filter.pipe';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FilterPipe} from './filter.pipe';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,23 +34,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CreateImageComponent,
     FilterPipe
   ],
-    imports: [
-        BrowserModule,
-        MatSelectModule,
-        FontAwesomeModule,
-        HttpClientModule,
-        AppRoutingModule,
-        NoopAnimationsModule,
-        MatChipsModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatOptionModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        NgbModule
-    ],
+  imports: [
+    BrowserModule,
+    MatSelectModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatOptionModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    NgbModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
